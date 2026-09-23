@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bombo de Formulación · TOP 100</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{
+  --ground:#EEF1F5; --surface:#FFFFFF; --ink:#1B2A3F; --muted:#5B6878; --line:#CBD3DD;
+  --navy:#1F4E78; --navy-ink:#FFFFFF; --oxide:#B8321F; --oxide-soft:#F8E4DF; --chip:#E3E8EF;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --ground:#121A24; --surface:#1B2532; --ink:#EEF2F6; --muted:#9AA7B6; --line:#34435A;
+  --navy:#2B6BA8; --navy-ink:#FFFFFF; --oxide:#E5674F; --oxide-soft:#3B2521; --chip:#26354A;
+}}
+:root[data-theme="dark"]{
+  --ground:#121A24; --surface:#1B2532; --ink:#EEF2F6; --muted:#9AA7B6; --line:#34435A;
+  --navy:#2B6BA8; --navy-ink:#FFFFFF; --oxide:#E5674F; --oxide-soft:#3B2521; --chip:#26354A;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;padding-inline:20px;padding-block:20px 40px;min-height:100vh}
+.wrap{max-width:1100px;margin:0 auto;display:grid;gap:18px}
+header{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 20px}
+h1{font-family:"Fraunces",Georgia,serif;font-weight:700;font-size:clamp(24px,3vw,34px);margin:0;letter-spacing:-.01em;text-wrap:balance}
+.sub{color:var(--muted);font-size:14px;margin:0}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.controls{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center}
+fieldset{border:0;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+legend,.lbl{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;padding:0;margin-right:4px}
+label.opt{display:inline-flex;align-items:center;gap:5px;font-size:14px;cursor:pointer;padding:4px 8px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+label.opt:has(input:checked){background:var(--navy);color:var(--navy-ink);border-color:var(--navy)}
+label.opt input{margin:0;accent-color:var(--navy)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-left:auto}
+button{font:inherit;cursor:pointer;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:10px 16px;font-weight:600}
+button:focus-visible{outline:3px solid var(--oxide);outline-offset:2px}
+button.primary{background:var(--oxide);border-color:var(--oxide);color:#fff;font-size:17px;padding:12px 26px}
+button.primary:disabled{opacity:.45;cursor:not-allowed}
+.stage{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:stretch}
+@media (max-width:760px){.stage{grid-template-columns:1fr}}
+.ball{background:var(--surface);border:1px solid var(--line);border-radius:14px;min-height:300px;display:grid;place-items:center;text-align:center;padding:28px 20px;position:relative}
+.ball .num{position:absolute;top:14px;left:18px;font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--muted);letter-spacing:.06em}
+.ball .cat{position:absolute;top:14px;right:18px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.big{font-size:clamp(48px,9vw,112px);font-weight:600;line-height:1.05;color:var(--oxide);margin:0;font-variant-numeric:tabular-nums}
+.big sub{font-size:.55em;vertical-align:-.25em}
+.name{font-size:clamp(24px,4.2vw,50px);font-weight:500;line-height:1.15;margin:0;text-wrap:balance;max-width:16ch}
+.pair{display:grid;gap:14px}
+.answer{font-size:clamp(18px,2.4vw,28px);color:var(--muted);margin:0}
+.answer.hidden{visibility:hidden}
+.empty{color:var(--muted);font-size:20px;max-width:28ch;text-wrap:balance}
+.ball.pop .big,.ball.pop .name{animation:pop .35s cubic-bezier(.2,.9,.3,1.3)}
+@keyframes pop{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+@media (prefers-reduced-motion:reduce){.ball.pop .big,.ball.pop .name{animation:none}}
+.side{display:grid;gap:12px;align-content:start;min-width:200px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+.stat b{display:block;font-family:"IBM Plex Mono",monospace;font-size:30px;font-weight:500;line-height:1.1}
+.stat span{font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.hist h2{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;font-weight:600}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-items:start}
+.col{background:var(--ground);border:1px solid var(--line);border-radius:8px;padding:8px}
+.col h3{margin:0 0 6px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);font-weight:600;display:flex;justify-content:space-between}
+.col h3 span{font-family:"IBM Plex Mono",monospace;color:var(--muted)}
+.chips{display:flex;flex-direction:column;gap:4px}
+.chip{background:var(--surface);border-radius:6px;padding:4px 8px;font-size:13px;display:flex;gap:6px;align-items:baseline;line-height:1.25}
+.chip .alt{color:var(--muted);font-size:11px;margin-left:auto;text-align:right}
+.chip .k{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted)}
+.chip.last{background:var(--oxide-soft);outline:1px solid var(--oxide)}
+.chip sub{font-size:.7em}
+.foot{font-size:12px;color:var(--muted)}
+kbd{font-family:"IBM Plex Mono",monospace;border:1px solid var(--line);border-radius:4px;padding:0 5px;font-size:11px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <h1>Bombo de Formulación</h1>
+    <p class="sub">TOP 100 · los 100 compuestos más usados · los mismos nombres que en los cartones de bingo y en el dominó</p>
+  </header>
+
+  <div class="panel controls">
+    <fieldset id="modeSet">
+      <legend>Se canta</legend>
+      <label class="opt"><input type="radio" name="mode" id="mode-n" value="n" checked> nombre (cartones de fórmulas)</label>
+      <label class="opt"><input type="radio" name="mode" id="mode-f" value="f"> fórmula (cartones de nombres)</label>
+    </fieldset>
+    <label class="opt"><input type="checkbox" id="showAnswer"> mostrar también la respuesta</label>
+    <div class="actions">
+      <button id="undo" title="Devolver la última bola al bombo">Deshacer</button>
+      <button id="reset">Reiniciar partida</button>
+      <button id="draw" class="primary">Sacar bola</button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <fieldset id="catSet">
+      <legend>Categorías en el bombo</legend>
+      <label class="opt"><input type="checkbox" id="cat-0" value="Hidruro" checked> Hidruro</label><label class="opt"><input type="checkbox" id="cat-1" value="Óxido" checked> Óxido</label><label class="opt"><input type="checkbox" id="cat-2" value="Hidróxido" checked> Hidróxido</label><label class="opt"><input type="checkbox" id="cat-3" value="Sal binaria" checked> Sal binaria</label><label class="opt"><input type="checkbox" id="cat-4" value="Ácido hidrácido" checked> Ácido hidrácido</label><label class="opt"><input type="checkbox" id="cat-5" value="Ácido oxoácido" checked> Ácido oxoácido</label><label class="opt"><input type="checkbox" id="cat-6" value="Sal ternaria (oxisal)" checked> Sal ternaria (oxisal)</label>
+    </fieldset>
+  </div>
+
+  <div class="stage">
+    <div class="ball" id="ball">
+      <div class="num" id="num"></div>
+      <div class="cat" id="cat"></div>
+      <div id="content"><p class="empty">Pulsa <strong>Sacar bola</strong> (o la barra espaciadora) para empezar.</p></div>
+    </div>
+    <aside class="side">
+      <div class="stat"><b id="drawn">0</b><span>bolas cantadas</span></div>
+      <div class="stat"><b id="left">100</b><span>quedan en el bombo</span></div>
+    </aside>
+  </div>
+
+  <div class="panel hist">
+    <h2>Historial de la partida</h2>
+    <div class="cols" id="chips"><span class="foot">Todavía no ha salido ninguna bola.</span></div>
+  </div>
+  <p class="foot"><kbd>Espacio</kbd> saca bola · <kbd>R</kbd> muestra/oculta la respuesta · la partida se guarda en este navegador hasta que la reinicies.<br>Diseñado por Javier Rihuete y Raquel Triguero · Colegio Edith Stein · Física y Química</p>
+</div>
+
+<script>
+const DATA = [{"c": "Hidruro", "f": "NaH", "n": "hidruro de sodio", "t": 1}, {"c": "Hidruro", "f": "KH", "n": "hidruro de potasio", "t": 1}, {"c": "Hidruro", "f": "CaH2", "n": "dihidruro de calcio", "t": 1}, {"c": "Hidruro", "f": "AlH3", "n": "trihidruro de aluminio", "t": 1}, {"c": "Hidruro", "f": "FeH3", "n": "trihidruro de hierro", "t": 1}, {"c": "Hidruro", "f": "NH3", "n": "trihidruro de nitrógeno", "t": 1}, {"c": "Hidruro", "f": "PH3", "n": "trihidruro de fósforo", "t": 1}, {"c": "Hidruro", "f": "CH4", "n": "tetrahidruro de carbono", "t": 1}, {"c": "Óxido", "f": "Na2O", "n": "óxido de disodio", "t": 1}, {"c": "Óxido", "f": "K2O", "n": "óxido de potasio", "t": 1}, {"c": "Óxido", "f": "MgO", "n": "óxido de magnesio", "t": 1}, {"c": "Óxido", "f": "CaO", "n": "óxido de calcio", "t": 1}, {"c": "Óxido", "f": "Al2O3", "n": "óxido de aluminio", "t": 1}, {"c": "Óxido", "f": "FeO", "n": "óxido de hierro(II)", "t": 1}, {"c": "Óxido", "f": "Fe2O3", "n": "óxido de hierro(III)", "t": 1}, {"c": "Óxido", "f": "Cu2O", "n": "óxido de cobre(I)", "t": 1}, {"c": "Óxido", "f": "CuO", "n": "óxido de cobre(II)", "t": 1}, {"c": "Óxido", "f": "ZnO", "n": "óxido de cinc", "t": 1}, {"c": "Óxido", "f": "PbO", "n": "óxido de plomo(II)", "t": 1}, {"c": "Óxido", "f": "PbO2", "n": "óxido de plomo(IV)", "t": 1}, {"c": "Óxido", "f": "SnO2", "n": "óxido de estaño(IV)", "t": 1}, {"c": "Óxido", "f": "HgO", "n": "monóxido de mercurio", "t": 1}, {"c": "Óxido", "f": "MnO2", "n": "óxido de manganeso(IV)", "t": 1}, {"c": "Óxido", "f": "CO", "n": "óxido de carbono(II)", "t": 1}, {"c": "Óxido", "f": "CO2", "n": "dióxido de carbono", "t": 1}, {"c": "Óxido", "f": "SO2", "n": "dióxido de azufre", "t": 1}, {"c": "Óxido", "f": "SO3", "n": "trióxido de azufre", "t": 1}, {"c": "Óxido", "f": "NO", "n": "óxido de nitrógeno(II)", "t": 1}, {"c": "Óxido", "f": "NO2", "n": "dióxido de nitrógeno", "t": 1}, {"c": "Óxido", "f": "N2O5", "n": "óxido de nitrógeno(V)", "t": 1}, {"c": "Óxido", "f": "Cl2O7", "n": "óxido de cloro(VII)", "t": 1}, {"c": "Óxido", "f": "SiO2", "n": "óxido de silicio(IV)", "t": 1}, {"c": "Hidróxido", "f": "NaOH", "n": "hidróxido de sodio", "t": 1}, {"c": "Hidróxido", "f": "KOH", "n": "hidróxido de potasio", "t": 1}, {"c": "Hidróxido", "f": "Mg(OH)2", "n": "dihidróxido de magnesio", "t": 1}, {"c": "Hidróxido", "f": "Ca(OH)2", "n": "hidróxido de calcio", "t": 1}, {"c": "Hidróxido", "f": "Ba(OH)2", "n": "hidróxido de bario", "t": 1}, {"c": "Hidróxido", "f": "Al(OH)3", "n": "trihidróxido de aluminio", "t": 1}, {"c": "Hidróxido", "f": "Fe(OH)2", "n": "dihidróxido de hierro", "t": 1}, {"c": "Hidróxido", "f": "Fe(OH)3", "n": "trihidróxido de hierro", "t": 1}, {"c": "Hidróxido", "f": "Cu(OH)2", "n": "dihidróxido de cobre", "t": 1}, {"c": "Hidróxido", "f": "Zn(OH)2", "n": "hidróxido de cinc", "t": 1}, {"c": "Sal binaria", "f": "NaCl", "n": "cloruro de sodio", "t": 1}, {"c": "Sal binaria", "f": "KI", "n": "yoduro de potasio", "t": 1}, {"c": "Sal binaria", "f": "CaCl2", "n": "cloruro de calcio", "t": 1}, {"c": "Sal binaria", "f": "MgBr2", "n": "dibromuro de magnesio", "t": 1}, {"c": "Sal binaria", "f": "AlCl3", "n": "cloruro de aluminio", "t": 1}, {"c": "Sal binaria", "f": "FeCl2", "n": "dicloruro de hierro", "t": 1}, {"c": "Sal binaria", "f": "FeCl3", "n": "tricloruro de hierro", "t": 1}, {"c": "Sal binaria", "f": "CuCl2", "n": "dicloruro de cobre", "t": 1}, {"c": "Sal binaria", "f": "PbCl2", "n": "dicloruro de plomo", "t": 1}, {"c": "Sal binaria", "f": "AgCl", "n": "cloruro de plata", "t": 1}, {"c": "Sal binaria", "f": "ZnCl2", "n": "cloruro de cinc", "t": 1}, {"c": "Sal binaria", "f": "Na2S", "n": "sulfuro de sodio", "t": 1}, {"c": "Sal binaria", "f": "CaS", "n": "sulfuro de calcio", "t": 1}, {"c": "Sal binaria", "f": "FeS", "n": "sulfuro de hierro(II)", "t": 1}, {"c": "Sal binaria", "f": "Fe2S3", "n": "sulfuro de hierro(III)", "t": 1}, {"c": "Sal binaria", "f": "CuS", "n": "monosulfuro de cobre", "t": 1}, {"c": "Sal binaria", "f": "Mg3N2", "n": "nitruro de magnesio", "t": 1}, {"c": "Sal binaria", "f": "PCl5", "n": "pentacloruro de fósforo", "t": 1}, {"c": "Ácido hidrácido", "f": "HF", "n": "ácido fluorhídrico", "t": 1}, {"c": "Ácido hidrácido", "f": "HCl", "n": "ácido clorhídrico", "t": 1}, {"c": "Ácido hidrácido", "f": "HBr", "n": "ácido bromhídrico", "t": 1}, {"c": "Ácido hidrácido", "f": "HI", "n": "ácido yodhídrico", "t": 1}, {"c": "Ácido hidrácido", "f": "H2S", "n": "sulfuro de dihidrógeno", "t": 1}, {"c": "Ácido oxoácido", "f": "H2CO3", "n": "ácido carbónico", "t": 1}, {"c": "Ácido oxoácido", "f": "HNO2", "n": "ácido nitroso", "t": 1}, {"c": "Ácido oxoácido", "f": "HNO3", "n": "ácido nítrico", "t": 1}, {"c": "Ácido oxoácido", "f": "H2SO3", "n": "ácido sulfuroso", "t": 1}, {"c": "Ácido oxoácido", "f": "H2SO4", "n": "ácido sulfúrico", "t": 1}, {"c": "Ácido oxoácido", "f": "HClO", "n": "ácido hipocloroso", "t": 1}, {"c": "Ácido oxoácido", "f": "HClO2", "n": "ácido cloroso", "t": 1}, {"c": "Ácido oxoácido", "f": "HClO3", "n": "ácido clórico", "t": 1}, {"c": "Ácido oxoácido", "f": "HClO4", "n": "ácido perclórico", "t": 1}, {"c": "Ácido oxoácido", "f": "HBrO3", "n": "ácido brómico", "t": 1}, {"c": "Ácido oxoácido", "f": "HIO3", "n": "ácido yódico", "t": 1}, {"c": "Ácido oxoácido", "f": "H3PO4", "n": "ácido fosfórico", "t": 1}, {"c": "Sal ternaria (oxisal)", "f": "Na2CO3", "n": "carbonato de sodio", "t": 1}, {"c": "Sal ternaria (oxisal)", "f": "K2CO3", "n": "carbonato de potasio", "t": 1}, {"c": "Sal ternaria (oxisal)", "f": "CaCO3", "n": "carbonato de calcio", "t": 1}, {"c": "Sal ternaria (oxisal)", "f": "NaNO3", "n": "nitrato de sodio", "t": 1}, {"c": "Sal ternaria (oxisal)", "f": "KNO3", "n": "nitrato de potasio", "t": 1}, {"c": "Sal ternaria (oxisal)", "f": "Ca(NO3)2", "n": "nitrato de calcio", "t": 1}, {"c": "Sal ternaria (oxisal)", "f": "AgNO3", "n": "nitrato de plata", "t": 1}, {"c": "Sal ternaria (oxisal)", "f": "Cu(NO3)2", "n": "nitrato de cobre(II)", "t": 1}, {"c": "Sal ternaria (oxisal)", "f": "Fe(NO3)3", "n": "nitrato de hierro(III)", "t": 1}, {"c": "Sal ternaria (oxisal)", "f": "NaNO2", "n": "nitrito de sodio", "t": 1}, {"c": "Sal ternaria (oxisal)", "f": "Na2SO4", "n": "sulfato de sodio", "t": 1}, {"c": "Sal ternaria (oxisal)", "f": "CaSO4", "n": "sulfato de calcio", "t": 1}, {"c": "Sal ternaria (oxisal)", "f": "CuSO4", "n": "sulfato de cobre(II)", "t": 1}, {"c": "Sal ternaria (oxisal)", "f": "FeSO4", "n": "sulfato de hierro(II)", "t": 1}, {"c": "Sal ternaria (oxisal)", "f": "Fe2(SO4)3", "n": "sulfato de hierro(III)", "t": 1}, {"c": "Sal ternaria (oxisal)", "f": "Al2(SO4)3", "n": "sulfato de aluminio", "t": 1}, {"c": "Sal ternaria (oxisal)", "f": "ZnSO4", "n": "sulfato de cinc", "t": 1}, {"c": "Sal ternaria (oxisal)", "f": "Na2SO3", "n": "sulfito de sodio", "t": 1}, {"c": "Sal ternaria (oxisal)", "f": "NaClO", "n": "hipoclorito de sodio", "t": 1}, {"c": "Sal ternaria (oxisal)", "f": "KClO3", "n": "clorato de potasio", "t": 1}, {"c": "Sal ternaria (oxisal)", "f": "KClO4", "n": "perclorato de potasio", "t": 1}, {"c": "Sal ternaria (oxisal)", "f": "Na3PO4", "n": "fosfato de sodio", "t": 1}, {"c": "Sal ternaria (oxisal)", "f": "Ca3(PO4)2", "n": "fosfato de calcio", "t": 1}];
+const CATS = [...new Set(DATA.map(d=>d.c))];
+const sub = f => f.replace(/(\d+)/g,'<sub>$1</sub>');
+const $ = id => document.getElementById(id);
+let state = {drawn:[], mode:'n', cats:CATS.slice(), show:false, set:'100'};
+try{ const s=JSON.parse(localStorage.getItem('bombo-formulacion-100')||'null'); if(s&&Array.isArray(s.drawn)) state={...state,...s}; }catch(e){}
+function save(){ try{ localStorage.setItem('bombo-formulacion-100',JSON.stringify(state)); }catch(e){} }
+
+function inSet(i){ return state.set==='300' || DATA[i].t===1; }
+function pool(){ return DATA.map((d,i)=>i).filter(i=>inSet(i)&&state.cats.includes(DATA[i].c)&&!state.drawn.includes(i)); }
+function render(pop){
+  const last = state.drawn[state.drawn.length-1];
+  const ball=$('ball'), c=$('content');
+  ball.classList.remove('pop');
+  if(last===undefined){
+    c.innerHTML='<p class="empty">Pulsa <strong>Sacar bola</strong> (o la barra espaciadora) para empezar.</p>';
+    $('num').textContent=''; $('cat').textContent='';
+  }else{
+    const d=DATA[last];
+    const main = state.mode==='n' ? `<p class="name">${d.n}</p>` : `<p class="big">${sub(d.f)}</p>`;
+    const ans  = state.mode==='n' ? `<p class="answer big ${state.show?'':'hidden'}" style="font-size:clamp(28px,5vw,60px)">${sub(d.f)}</p>`
+                                  : `<p class="answer ${state.show?'':'hidden'}">${d.n}</p>`;
+    c.innerHTML=`<div class="pair">${main}${ans}</div>`;
+    $('num').textContent='BOLA '+String(state.drawn.length).padStart(3,'0')+' · Nº '+(last+1);
+    $('cat').textContent=d.c;
+    if(pop){ void ball.offsetWidth; ball.classList.add('pop'); }
+  }
+  const left=pool().length;
+  $('drawn').textContent=state.drawn.length; $('left').textContent=left;
+  $('draw').disabled=left===0; $('undo').disabled=state.drawn.length===0;
+  if(!state.drawn.length){ $('chips').innerHTML='<span class="foot">Todavía no ha salido ninguna bola.</span>'; }
+  else{
+    const lastI=state.drawn[state.drawn.length-1];
+    $('chips').innerHTML=CATS.filter(cn=>state.cats.includes(cn)).map(cn=>{
+      const items=state.drawn.map((i,k)=>[i,k]).filter(([i])=>DATA[i].c===cn);
+      const body=items.length?items.map(([i,k])=>`<span class="chip ${i===lastI?'last':''}"><span class="k">${k+1}</span>${state.mode==='n'?DATA[i].n:sub(DATA[i].f)}${state.show?`<span class="alt">${state.mode==='n'?sub(DATA[i].f):DATA[i].n}</span>`:''}</span>`).join(''):'<span class="foot">—</span>';
+      return `<div class="col"><h3>${cn}<span>${items.length}</span></h3><div class="chips">${body}</div></div>`;
+    }).join('');
+  }
+  $('showAnswer').checked=state.show;
+  document.querySelector(`input[name=mode][value=${state.mode}]`).checked=true;
+    CATS.forEach((cn,k)=>{ const el=document.getElementById('cat-'+k); const n=DATA.filter(d=>d.c===cn&&(state.set==='300'||d.t===1)).length; el.parentNode.lastChild.textContent=` ${cn} (${n})`; });
+  CATS.forEach(cn=>{ const el=document.getElementById('cat-'+CATS.indexOf(cn)); if(el) el.checked=state.cats.includes(cn); });
+}
+function draw(){ const p=pool(); if(!p.length) return; state.drawn.push(p[Math.floor(Math.random()*p.length)]); save(); render(true); }
+$('draw').onclick=draw;
+$('undo').onclick=()=>{ state.drawn.pop(); save(); render(false); };
+$('reset').onclick=()=>{ if(state.drawn.length && !confirm('¿Reiniciar la partida? Se vacía el historial.')) return; state.drawn=[]; save(); render(false); };
+$('showAnswer').onchange=e=>{ state.show=e.target.checked; save(); render(false); };
+document.querySelectorAll('input[name=mode]').forEach(r=>r.onchange=e=>{ state.mode=e.target.value; save(); render(false); });
+document.querySelectorAll('#catSet input').forEach(cb=>cb.onchange=()=>{ state.cats=[...document.querySelectorAll('#catSet input:checked')].map(x=>x.value); save(); render(false); });
+document.addEventListener('keydown',e=>{ if(e.target.tagName==='INPUT'||e.target.tagName==='BUTTON') return; if(e.code==='Space'){e.preventDefault();draw();} if(e.key==='r'||e.key==='R'){state.show=!state.show;save();render(false);} });
+render(false);
+</script>
+</body>
+</html>
